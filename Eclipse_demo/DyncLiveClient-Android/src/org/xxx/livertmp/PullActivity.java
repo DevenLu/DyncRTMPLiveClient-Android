@@ -47,12 +47,18 @@ public class PullActivity extends AppCompatActivity implements PlayHelper {
         DyncLivePlayer.Instance().init(this, videoView, this);
     }
 
+    @Override
+    protected void onDestroy() {
+ 	   super.onDestroy();
+ 	   DyncLivePlayer.Instance().destroy();
+    }
+
     public void OnBtnClick(View view) {
         Button btn = (Button) view;
         if (btn.getId() == R.id.btn_click) {
             if(mStarted) {
                 DyncLivePlayer.Instance().stop();
-                finish();
+                ((Button) view).setText("播放");
             } else {
                 DyncLivePlayer.Instance().play(mUrl);
                 ((Button) view).setText("停止");
@@ -64,24 +70,40 @@ public class PullActivity extends AppCompatActivity implements PlayHelper {
     /**
      * Implements for PlayHelper
      */
+    /**
+     * 播放OK
+     */
     @Override
     public void OnRtmplayerOK() {
 
     }
 
+    /**
+     * 当前的播放状态
+     * @param cacheTime 已缓冲的时间
+     * @param curBitrate    当前的网络比特率
+     */
     @Override
     public void OnRtmplayerStatus(int cacheTime, int curBitrate) {
 
     }
 
+    /**
+     * 正在进行缓冲
+     * @param time  缓冲的时间
+     */
     @Override
     public void OnRtmplayerCache(int time) {
 
     }
 
+    /**
+     * 播放已结束
+     * @param errcode 0:正常结束
+     */
     @Override
     public void OnRtmplayerClose(int errcode) {
-
+	
     }
 }
 

@@ -127,6 +127,9 @@ public class PushActivity extends AppCompatActivity implements VideoSurfaceEvent
     /**
      * Implements for StreamHelper
      */
+    /**
+     * 媒体流发布成功
+     */
     @Override
     public void OnStreamOk() {
         runOnUiThread(new Runnable() {
@@ -137,6 +140,10 @@ public class PushActivity extends AppCompatActivity implements VideoSurfaceEvent
         });
     }
 
+    /**
+     * 正在重连服务器(发布过程中网络出现异常，将进行3次重连)
+     * @param times
+     */
     @Override
     public void OnStreamReconnecting(int times)
     {
@@ -148,6 +155,10 @@ public class PushActivity extends AppCompatActivity implements VideoSurfaceEvent
         });
     }
 
+    /**
+     * 媒体流发布失败
+     * @param code  错误原因 {1:网络失败，无法连接服务器}
+     */
     @Override
     public void OnStreamFailed(int code) {
         runOnUiThread(new Runnable() {
@@ -158,6 +169,9 @@ public class PushActivity extends AppCompatActivity implements VideoSurfaceEvent
         });
     }
 
+    /**
+     * 媒体流与服务器的链接中断（3次重连失败后回调）
+     */
     @Override
     public void OnStreamClosed() {
         runOnUiThread(new Runnable() {
@@ -168,6 +182,11 @@ public class PushActivity extends AppCompatActivity implements VideoSurfaceEvent
         });
     }
 
+    /**
+     * 媒体流当前的状态
+     * @param delayMs   发送队列的时延
+     * @param netBand   发送的数据流占用的带宽
+     */
     @Override
     public void OnStreamStatus(final int delayMs, final int netBand) {
         runOnUiThread(new Runnable() {
