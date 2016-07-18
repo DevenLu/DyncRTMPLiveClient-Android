@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity{
             Intent it = new Intent(this, PullActivity.class);
             Bundle bd = new Bundle();
 //            bd.putString("url", "rtmp://live.hkstv.hk.lxdns.com/live/hks");
-//            bd.putString("url", "rtmp://192.168.7.207:1935/live1/room");
-            bd.putString("url", "rtmp://www.teameeting.cn/live/f001");
+            bd.putString("url", "rtmp://192.168.7.207:1935/live1/room");
+//            bd.putString("url", "rtmp://www.teameeting.cn/live/f001");
             it.putExtras(bd);
             startActivity(it);
         }
