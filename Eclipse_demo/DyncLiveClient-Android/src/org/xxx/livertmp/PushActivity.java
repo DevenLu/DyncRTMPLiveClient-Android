@@ -48,7 +48,11 @@ public class PushActivity extends AppCompatActivity implements VideoSurfaceEvent
         }
 
         mUrl = getIntent().getExtras().getString("url");
-        DyncLivePublisher.Instance().init(this, 1, this, this);
+        /**
+         * cameraId: 摄像头的id：0：后置摄像头，1：前置摄像头
+         * videoMode 设置超高清/超清/高清/标清/流畅: 4/3/2/1/0
+         */
+        DyncLivePublisher.Instance().init(this, 1, 2, this, this);
     }
 
     @Override
@@ -110,9 +114,9 @@ public class PushActivity extends AppCompatActivity implements VideoSurfaceEvent
     }
 
     @Override
-    public BeautifyCameraView OnGetBeautifyRender() {
+    public BeautifyCameraView OnGetBeautifyRender(int videoMode) {
         BeautifyCameraView beautyView = null;
-        beautyView = new BeautifyCameraView(this);
+        beautyView = new BeautifyCameraView(this, videoMode);
         beautyView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         rl_videos.removeAllViews();
         rl_videos.addView(beautyView);
